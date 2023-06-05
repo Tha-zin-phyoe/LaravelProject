@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Middleware\AdminAuthMiddleware;
+use App\Http\Controllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +26,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 Route::apiResource('employees',EmployeeController::class);
+
+//ADMIN SECTION
+Route::post('admin/register',[AdminController::class,'register']);
+Route::post('admin/login',[AdminAuthController::class,'login']);
+Route::group(['prefix' => 'admin', 'middleware' => AdminAuthMiddleware::class], function () {
+    Route::apiResource('/user/list/admin',AdminController::class);
+    Route::post('/logout',[AdminAuthController::class,'logout']);
+    Route::post('/password/update',[AdminController::class,'adminPasswordUpdate']);
+});
