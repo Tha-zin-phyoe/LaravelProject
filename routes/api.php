@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Middleware\AdminAuthMiddleware;
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ProjectTeamController;
+use App\Http\Controllers\TeamEmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,9 @@ Route::group(['prefix' => 'admin', 'middleware' => AdminAuthMiddleware::class], 
     Route::apiResource('/user/list/admin',AdminController::class);
     Route::post('/logout',[AdminAuthController::class,'logout']);
     Route::post('/password/update',[AdminController::class,'adminPasswordUpdate']);
+    Route::apiResource('/team/employee',TeamEmployeeController::class);
+    Route::apiResource('/employee/attendance',AttendanceController::class);
 });
-
 
 // Project API
 Route::apiResource('projects',ProjectController::class);

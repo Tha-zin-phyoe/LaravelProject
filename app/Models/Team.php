@@ -12,4 +12,7 @@ class Team extends Model
     public function project(){
         return $this->belongsToMany(Project::class,ProjectTeam::class);
     }
+    // public function teamEmployee(){
+    //     return $this->belongsToMany(TeamEmployee::class)->where("delete_status",1);
+    // }
 }
