@@ -1,16 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $employees = Employee::all();

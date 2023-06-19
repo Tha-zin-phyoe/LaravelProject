@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -7,6 +8,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Middleware\AdminAuthMiddleware;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +38,12 @@ Route::group(['prefix' => 'admin', 'middleware' => AdminAuthMiddleware::class], 
     Route::post('/logout',[AdminAuthController::class,'logout']);
     Route::post('/password/update',[AdminController::class,'adminPasswordUpdate']);
 });
+
+
+// Project API
+Route::apiResource('projects',ProjectController::class);
+// Team API
+Route::apiResource('teams',TeamController::class);
+
+// Project Team API
+Route::apiResource('projectsteam',ProjectTeamController::class);
