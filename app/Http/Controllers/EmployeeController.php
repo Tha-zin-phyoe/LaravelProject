@@ -83,13 +83,12 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-  
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Employee $employee)
     {
-     
         $validator = Validator::make($request->all(),[
             "fullname"=>'required|string',
             "email"=>'required|string|email',
@@ -103,10 +102,8 @@ class EmployeeController extends Controller
             return response()->json([
                 "message"=>"Validation Error",
                 "error"=>$validator->errors()
-
             ],400);
         }
-       
         if($employee->update($request->all())){
             return response()->json([
                 'error'=>false,

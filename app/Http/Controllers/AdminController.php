@@ -58,11 +58,12 @@ class AdminController extends Controller
     {
 
         $validated = $request->validated();
-        // return $validated;
+    //  return $validated;
         $validated['password'] = bcrypt($validated['password']);
         $validated["auth_token"] = uniqid(base64_encode(Str::random(21)));
         $validated["token_expired_at"]  = Carbon::now()->addWeeks(1);
         $admin = Admin::create($validated);
+        // return $admin;
         return new AdminResource($admin);
 
     }//End Method
@@ -112,7 +113,6 @@ class AdminController extends Controller
     //Admin Password Updated
     public function adminPasswordUpdate(AdminPasswordRequest $request)
     {
-
            $request->validated();
     //    return $validated;
        $user = Admin::where('id',$request->id)->first();
@@ -126,8 +126,6 @@ class AdminController extends Controller
          return new AdminPasswordResource($user);
        }
     }//End method
-
-
     public function destroy(string $id)
     {
         $admin = Admin::find($id);

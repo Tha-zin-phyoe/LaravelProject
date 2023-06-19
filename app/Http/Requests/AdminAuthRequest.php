@@ -23,7 +23,7 @@ class AdminAuthRequest extends FormRequest
     {
         return [
             'email.required' => 'Email is required',
-            'password.required' => 'x is required',
+            'password.required' => 'Password is required',
             'email.email' => 'Email must be email',
         ];
     }
