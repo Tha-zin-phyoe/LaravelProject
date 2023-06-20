@@ -53,10 +53,10 @@ class TeamEmployeeController extends Controller
     {
 
         $validated = $request->validated();
-    //  return $validated;
+
        
         $data = TeamEmployee::create($validated);
-        // return $admin;
+      
         return new TeamEmployeeResource($data);
     }
 
@@ -79,16 +79,36 @@ class TeamEmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TeamEmployee $teamEmployee)
+    public function update(TeamEmployeeRequest $request, $id)
     {
-        //
+    
+        // return $id;
+        $validated = $request->validated();
+        TeamEmployee::where("id",$id)->update($validated);
+      return response()->json([
+        "error"=>false,
+        "message"=>"Updated Successfully!",
+        "data"=>true
+      ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TeamEmployee $teamEmployee)
+    public function destroy($id)
     {
-        //
+        // return $id;
+        $data = TeamEmployee::find($id);
+        if($data){
+            $data->delete_status =0;
+            if($data->save()){
+                return response()->json([
+                    "error"=>false,
+                    "message"=>"Deleted Successfully!",
+                    "data"=>$data
+                  ]);
+
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ class AttendanceResource extends JsonResource
         return  [
             "id"=>$this->id,
             "employee_id"=>$this->employee->id,
+            "employee"=>$this->employee->fullname,
             "datetime"=>$this->datetime,
             "status"=>$this->status,
             // 'error' => false,

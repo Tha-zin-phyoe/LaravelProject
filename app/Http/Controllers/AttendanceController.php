@@ -15,7 +15,7 @@ class AttendanceController extends Controller
     public function index()
     {
    
-        // return "hello";
+        //  return "hello";
         $page = Request()->has('page') ? Request()->get('page') : 1;
         $dateTime =Request()->has('datetime') ? Request()->get('datetime') : "";
         $limit =Request()->has('limit') ? Request()->get('limit') : 10;
@@ -29,7 +29,7 @@ class AttendanceController extends Controller
             ->limit($limit)
             ->offset(($page - 1) * $limit)->get();
         $attendance= AttendanceResource::collection($attendances);
-       
+    
         return response()->json([
             'data' => $attendance,
             'message' => ' Attendance list.',
@@ -79,9 +79,13 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Attendance $attendance)
+    public function update(AttendanceRequest $request, Attendance $attendance)
     {
-        //
+        // return $attendance;
+        $validated = $request->validated();
+        // return $validated;
+        $attendance->update($validated);
+        return new AttendanceResource($attendance);
     }
 
     /**
@@ -89,6 +93,19 @@ class AttendanceController extends Controller
      */
     public function destroy(Attendance $attendance)
     {
-        //
+      
+        $data = $attendance;
+        if($data){
+            $data->delete_status =0;
+            if($data->save()){
+                return response()->json([
+                    "error"=>false,
+                    "message"=>"Deleted Successfully!",
+                    "data"=>$data
+                  ]);
+
+            }
+        }
+
     }
 }

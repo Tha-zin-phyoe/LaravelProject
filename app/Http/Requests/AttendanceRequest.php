@@ -28,7 +28,7 @@ class AttendanceRequest extends FormRequest
         return [
             'datetime' => 'required',
             'employee_id' => 'required|integer',
-            // 'status'=>"nullable|default"
+            'status'=>"integer"
             
         ];
     }
@@ -37,6 +37,7 @@ class AttendanceRequest extends FormRequest
         return [
             'datetime.required' => 'datetime is required',
             'employee_id.required' => 'employee_id is required',
+            'status.required' => 'status is required',
            
         ];
     }

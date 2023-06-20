@@ -18,7 +18,7 @@ class TeamEmployeeResource extends JsonResource
             'id'=>$this->id,
             "team_employee"=>$this->employee,
             "team_id"=>$this->team->id,
-             "teamName"=>$this->team->name,
+          "teamName"=>$this->team->name,
             // 'error' => false,
             // 'message' => 'Admin Successfully',
             //  'data' => parent::toArray($request),

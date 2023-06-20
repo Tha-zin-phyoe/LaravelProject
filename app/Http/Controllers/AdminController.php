@@ -91,7 +91,7 @@ class AdminController extends Controller
     {
         // return $admin;
         $validated = $request->validated();
-        // return $validated;
+         return $validated;
         if (isset($request->photo)) {
          $operation = new AdminImageOperation($request->photo,$request->name,'admin-images');
          $url = $operation->storeImage();

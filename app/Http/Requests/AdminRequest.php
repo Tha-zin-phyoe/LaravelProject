@@ -26,7 +26,7 @@ class AdminRequest extends FormRequest
             'email' => 'required|email|unique:admins',
             'name' => 'required|string',
             'photo'=>"nullable|string",
-             'password' => 'required|string',
+            //  'password' => 'required|string',
         ];
     }
     public function messages()
@@ -34,7 +34,7 @@ class AdminRequest extends FormRequest
         return [
             'email.required' => 'Email is required',
             'name.required' => 'Name is required',
-            'password.required' => 'Password is required',
+            // 'password.required' => 'Password is required',
             'email.email' => 'Email must be email',
             'email.unique' => 'Email must be already exist!',
         ];
