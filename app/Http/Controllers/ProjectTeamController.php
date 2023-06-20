@@ -61,23 +61,41 @@ class ProjectTeamController extends Controller
      */
     public function show(ProjectTeam $projectTeam)
     {
-        //
+        return response()->json([
+            "data"=>$projectTeam,
+            "message"=>"success"
+
+        ],200);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProjectTeam $projectTeam)
-    {
-        //
-    }
-
+ 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, ProjectTeam $projectTeam)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            "project_id"=>'required',
+            "team_id"=>'required',
+            
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                "message"=>"Validation Error",
+                "error"=>$validator->errors()
+
+            ],400);
+        }
+        if($projectTeam->update($request->all())){
+            return response()->json([
+                'error'=>false,
+                'message'=>'Data Updated Successfully',
+                'data'=>$projectTeam,
+            ]);
+            }
     }
 
     /**
@@ -85,6 +103,11 @@ class ProjectTeamController extends Controller
      */
     public function destroy(ProjectTeam $projectTeam)
     {
-        //
+        if($projectTeam->delete()){
+            return response()->json([
+                "message"=>"Deleted Successfully"
+
+            ],204);
+        }
     }
 }
