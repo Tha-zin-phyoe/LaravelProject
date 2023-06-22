@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\AdminResource;
+use App\Http\Requests\AdminInfoRequest;
 use App\FileOperations\AdminImageOperation;
 use App\Http\Requests\AdminPasswordRequest;
 use App\Http\Resources\AdminPasswordResource;
@@ -87,7 +88,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AdminRequest $request,Admin $admin)
+    public function update(AdminInfoRequest $request,Admin $admin)
     {
         // return $admin;
         $validated = $request->validated();
@@ -100,11 +101,11 @@ class AdminController extends Controller
     if($validated['photo'] == null){
         $validated['photo']= $admin->photo;
          $admin->update($validated);
-        return new adminResource($admin);
+        return new AdminResource($admin);
 
     }else{
        $admin->update($validated);
-       return new adminResource($admin);
+       return new AdminResource($admin);
 
      };
 

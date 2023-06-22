@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class AdminRequest extends FormRequest
+class AdminInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class AdminRequest extends FormRequest
             'email' => 'required|email|unique:admins',
             'name' => 'required|string',
             'photo'=>"nullable|string",
-             'password' => 'required|string',
+            //  'password' => 'required|string',
         ];
     }
     public function messages()
@@ -34,7 +34,7 @@ class AdminRequest extends FormRequest
         return [
             'email.required' => 'Email is required',
             'name.required' => 'Name is required',
-             'password.required' => 'Password is required',
+            //  'password.required' => 'Password is required',
             'email.email' => 'Email must be email',
             'email.unique' => 'Email must be already exist!',
         ];
